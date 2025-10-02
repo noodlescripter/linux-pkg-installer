@@ -21,6 +21,7 @@ base_packages_pacman=(
     "vim" 
     "zip"
     "unzip"
+    "git"
 )
 
 for pacman_pkg in "${base_packages_pacman[@]}"; do
@@ -123,6 +124,9 @@ else
 fi
 echo "✅ NVM and Node.js setup complete."
 echo ""
+
+curl -sSL -o https://raw.githubusercontent.com/noodlescripter/linux-pkg-installer/main/dconf-arch.txt
+dconf load /org/gnome/shell/extenstions/ < ~/dconf-arch.txt
 
 # --- Final Message ---
 echo "🎉 All developer tools have been set up!"
