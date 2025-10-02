@@ -15,6 +15,49 @@ sudo pacman -Syu --noconfirm
 echo "✅ System update complete."
 echo ""
 
+echo "--> Installing base utilities..."
+base_packages_pacman=(
+    "curl" 
+    "vim" 
+    "zip"
+    "unzip"
+)
+
+for pacman_pkg in "${base_packages_pacman[@]}"; do
+    echo "Installing $pacman_pkg.."
+    sudo pacman -S "$pacman_pkg" --noconfirm
+done
+
+echo "--> Base util using pacman done!"
+echo ""
+echo "--> Installing base utilities..."
+base_packages_yay=(
+    "docker"
+    "docker-compose"
+    "google-chrome"
+    "zoom"
+    "lazydocker"
+)
+
+for yay_pkg in "${base_packages_yay[@]}"; do
+    echo "Installing $yay_pkg.."
+    yay -S "$yay_pkg" --noconfirm
+done
+echo "--> Base util using yay done!"
+echo ""
+
+echo "--> Starting docker"
+sudo systemctl enable docker.service
+
+echo ""
+sudo systemctl start docker.service
+
+echo "--> creating docker group and assign user"
+sudo usermod -aG docker $USER
+
+newgrp docker
+echo "Done!"
+
 # --- SDKMAN!, Java, and Maven ---
 echo "--> Step 1: Setting up SDKMAN!, Java, and Maven..."
 
